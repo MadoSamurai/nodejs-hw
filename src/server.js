@@ -29,15 +29,17 @@ app.get('/test-error', () => {
   throw new Error('Simulated server error');
 });
 
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).json({
     message: 'Route not found',
   });
 });
 
 app.use((err, req, res, next) => {
+  const isProd = process.env.NODE_ENV === 'production';
+
   res.status(500).json({
-    message: err.message,
+    message: isProd ? err.message : err.stack,
   });
 });
 
