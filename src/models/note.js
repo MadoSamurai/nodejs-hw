@@ -14,7 +14,7 @@ const noteSchema = new Schema(
     },
     tag: {
       type: String,
-      enam: [
+      enum: [
         'Work',
         'Personal',
         'Meeting',
